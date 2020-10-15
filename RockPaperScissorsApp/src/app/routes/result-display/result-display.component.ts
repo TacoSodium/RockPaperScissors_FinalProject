@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RpsService } from "../../rps.service";
 
 @Component({
@@ -8,9 +9,18 @@ import { RpsService } from "../../rps.service";
 })
 export class ResultDisplayComponent implements OnInit {
 
-  constructor(private Rpsservice: RpsService) { }
+  constructor(public rpsService: RpsService, private router: Router) {
+    this.rpsService.selection;
+  }
 
   ngOnInit(): void {
+    if (this.rpsService.selection == null) {
+      this.router.navigateByUrl("/pick");
+    }
+  }
+
+  playAgain() {
+    this.router.navigateByUrl("/pick");
   }
 
 }

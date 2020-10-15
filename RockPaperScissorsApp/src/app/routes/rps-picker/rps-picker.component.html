@@ -1,8 +1,8 @@
 <div class="container">
     <div class="choices">
-        <div class="selection rock"></div>
-        <div class="selection paper"></div>
-        <div class="selection scissors"></div>
+        <input type="button" class="selection rock" (click)="selectOption('rock')">
+        <input type="button" class="selection paper" (click)="selectOption('paper')">
+        <input type="button" class="selection scissors" (click)="selectOption('scissors')">
     </div>
-    <button>Shoot!</button>
+    <button (click)="send()">Shoot!</button>
 </div>

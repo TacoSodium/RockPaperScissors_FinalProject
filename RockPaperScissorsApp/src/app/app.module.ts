@@ -10,7 +10,7 @@ import { ResultDisplayComponent } from './routes/result-display/result-display.c
   declarations: [
     AppComponent,
     RpsPickerComponent,
-    ResultDisplayComponent
+    ResultDisplayComponent,
   ],
   imports: [
     BrowserModule,

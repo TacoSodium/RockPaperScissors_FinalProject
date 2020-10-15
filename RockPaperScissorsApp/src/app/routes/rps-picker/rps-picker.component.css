@@ -29,16 +29,16 @@ button:hover {
 
 .choices {
     display: inline-flex;
-    align-content: space-between;
 }
 
 .selection {
     width: 200px;
     height: 200px;
     cursor: pointer;
+    border: none;
 }
 
-.selected {
+.selection:focus {
     outline: 1px solid midnightblue;
 }
 
