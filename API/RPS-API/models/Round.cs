@@ -38,43 +38,43 @@ namespace RPS_API.models
             // case "rock"
             if (this.CPUChoice == "rock" && this.PlayerChoice == "rock")
             {
-                return "draw";
+                return "It's a draw";
             }
             else if (this.CPUChoice == "rock" && this.PlayerChoice == "scissors")
             {
-                return "lose";
+                return "You lose";
             }
             else if (this.CPUChoice == "rock" && this.PlayerChoice == "paper")
             {
-                return "win";
+                return "You win";
             }
 
             // case "paper"
             else if (this.CPUChoice == "paper" && this.PlayerChoice == "rock")
             {
-                return "lose";
+                return "You lose";
             }
             else if (this.CPUChoice == "paper" && this.PlayerChoice == "paper")
             {
-                return "draw";
+                return "It's a draw";
             }
             else if (this.CPUChoice == "paper" && this.PlayerChoice == "scissors")
             {
-                return "win";
+                return "You win";
             }
 
             // case "scissors"
             else if (this.CPUChoice == "scissors" && this.PlayerChoice == "rock")
             {
-                return "win";
+                return "You win";
             }
             else if (this.CPUChoice == "scissors" && this.PlayerChoice == "paper")
             {
-                return "lose";
+                return "You lose";
             }
             else if (this.CPUChoice == "scissors" && this.PlayerChoice == "scissors")
             {
-                return "draw";
+                return "It's a draw";
             }
 
             else

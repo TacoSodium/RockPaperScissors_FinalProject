@@ -6586,11 +6586,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Coryn\\OneDrive\\Cert IV 02\\Final Assessment\\API\\API.csproj",
-      "projectName": "API",
-      "projectPath": "C:\\Users\\Coryn\\OneDrive\\Cert IV 02\\Final Assessment\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\Coryn\\OneDrive\\Cert IV 02\\Final Assessment\\API\\tests\\tests.csproj",
+      "projectName": "tests",
+      "projectPath": "C:\\Users\\Coryn\\OneDrive\\Cert IV 02\\Final Assessment\\API\\tests\\tests.csproj",
       "packagesPath": "C:\\Users\\Coryn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Coryn\\OneDrive\\Cert IV 02\\Final Assessment\\API\\obj\\",
+      "outputPath": "C:\\Users\\Coryn\\OneDrive\\Cert IV 02\\Final Assessment\\API\\tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

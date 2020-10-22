@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
-import { RpsService } from "../../rps.service";
-import { delay } from 'rxjs/operators';
+import { RpsService } from "../../services/rps.service";
 
 @Component({
   selector: 'app-rps-picker',
@@ -23,9 +21,8 @@ export class RpsPickerComponent implements OnInit {
   }
 
   send() {
-    of(null).pipe(delay(300)).subscribe(() => {
-      this.rpsService.commitSelection(this.selection);
-      this.router.navigateByUrl("/display");
-    })
+    this.rpsService.commitSelection({
+      playerChoice: this.selection
+    });
   }
 }

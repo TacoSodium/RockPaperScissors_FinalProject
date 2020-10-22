@@ -8,8 +8,9 @@ namespace RPS_API.Controllers
     [Route("[controller]")]
     public class RPSController : ControllerBase
     {
+        // POST: /RPS
         [HttpPost]
-        public Round PlayRequest(PlayRequest playerChoice)
+        public Round PlayRequest([FromBody] PlayRequest playerChoice)
         {
             string choice = playerChoice.PlayerChoice;
 

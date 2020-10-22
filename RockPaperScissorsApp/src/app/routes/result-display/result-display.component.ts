@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RpsService } from "../../rps.service";
+import { RpsService } from "../../services/rps.service";
 
 @Component({
   selector: 'app-result-display',
