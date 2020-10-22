@@ -8,7 +8,8 @@ import { ScoreService } from 'src/app/services/score.service';
 })
 export class ScoreListComponent implements OnInit {
 
-  constructor(public scoreService: ScoreService) { }
+  constructor(public scoreService: ScoreService) { 
+  }
 
   ngOnInit(): void {
   }
