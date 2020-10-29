@@ -28,10 +28,7 @@ namespace RPS_API.Controllers
 
             if (found == null)
             {
-                user.Username = request.Username;
-                user.Wins = 0;
-                user.TurnsPlayed = 1;
-
+                user = new User(request.Username, 0, 1);
                 Positions.Add(user);
             }
             else
