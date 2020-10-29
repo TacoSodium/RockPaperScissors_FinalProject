@@ -51,7 +51,7 @@ namespace RPS_API.Controllers
         [HttpGet("Leaderboard")]
         public List<User> ViewLeaderBoard()
         {
-            List<User> LeaderboardView = Positions.OrderBy(u => u.WinRatio).ToList();
+            List<User> LeaderboardView = Positions.OrderByDescending(u => u.WinRatio).ToList();
 
             return LeaderboardView;
         }

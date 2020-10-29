@@ -20,7 +20,6 @@ export class AppComponent {
   toggleReports() {
     if (this.playing) {
       this.router.navigateByUrl("/leaderboard");
-      this.scoreService.get();
       this.playing = false;
     }
     else

@@ -12,6 +12,7 @@ export class ReportDisplayComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.scoreService.get();
   }
 
 }
