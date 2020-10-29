@@ -21,8 +21,14 @@ export class RpsPickerComponent implements OnInit {
   }
 
   send() {
-    this.rpsService.commitSelection({
-      playerChoice: this.selection
-    });
+    if (this.rpsService.username == null) {
+      alert("Please enter a username")
+    }
+    else {
+      this.rpsService.commitSelection({
+        username: this.rpsService.username,
+        playerChoice: this.selection
+      });
+    }
   }
 }

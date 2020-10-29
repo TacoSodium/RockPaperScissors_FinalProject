@@ -1,14 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Score } from "../models/Score";
+import { User } from "../models/ScoreModels";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScoreService {
 
-  scores: Score[] = [
-    new Score("BobFrank", 40, 300),
-    new Score("BobRank", 5, 3000),
-    new Score("BobDrank", 70, 4)
-  ];
+  scores: User[] = [];
+
+  private httpClient: HttpClient;
+  constructor(httpClient: HttpClient) {
+    this.httpClient = httpClient;
+  }
+
+  get() {
+    this.httpClient.get<User[]>("http://localhost:5000/rps/leaderboard").subscribe((response) => {
+      this.scores = response;
+    })
+  }
 }

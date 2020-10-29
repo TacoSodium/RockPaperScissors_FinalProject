@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using RPS_API.models;
+using System.Linq;
 
 namespace RPS_API.Controllers
 {
@@ -8,15 +9,51 @@ namespace RPS_API.Controllers
     [Route("[controller]")]
     public class RPSController : ControllerBase
     {
+
+        public static List<User> Positions = new List<User>();
+
+        public RPSController()
+        {
+
+        }
+
         // POST: /RPS
         [HttpPost]
-        public Round PlayRequest([FromBody] PlayRequest playerChoice)
+        public Round PlayRequest([FromBody] PlayRequest request)
         {
-            string choice = playerChoice.PlayerChoice;
+            Round r = new Round(request.Username, request.PlayerChoice);
 
-            Round r = new Round(choice);
+            User user = null;
+            User found = Positions.Find(u => u.Username == request.Username);
+
+            if (found == null)
+            {
+                user = new User(request.Username, 0, 1);
+                Positions.Add(user);
+            }
+            else
+            {
+                user = found;
+                user.TurnsPlayed++;
+            }
+
+            if (r.Result == "You win")
+            {
+                user.Wins++;
+            }
+
+            user.CalcWinRatio();
 
             return r;
+        }
+
+        // POST: /RPS/leaderboard
+        [HttpGet("Leaderboard")]
+        public List<User> ViewLeaderBoard()
+        {
+            List<User> LeaderboardView = Positions.OrderByDescending(u => u.WinRatio).ToList();
+
+            return LeaderboardView;
         }
     }
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Score } from '../../models/Score'
+import { User } from '../../models/ScoreModels'
 
 @Component({
   selector: 'app-score',
@@ -9,7 +9,7 @@ import { Score } from '../../models/Score'
 export class ScoreComponent implements OnInit {
 
   @Input()
-  score: Score;
+  score: User;
 
   constructor() { }
 

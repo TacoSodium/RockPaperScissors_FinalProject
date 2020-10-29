@@ -10,9 +10,10 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/RPS-API/bin/Debug/netcoreapp3.1/RPS-API.dll",
+            "program": "${workspaceFolder}/API/RPS-API/bin/Debug/netcoreapp3.1/RPS-API.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/RPS-API",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {

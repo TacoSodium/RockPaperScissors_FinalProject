@@ -11,6 +11,6 @@ h4 {
 .results {
     display: flex;
     justify-content: space-between;
-    background-color: antiquewhite;
+    background-color: rgb(226, 233, 238);
     align-content: center;
 }
