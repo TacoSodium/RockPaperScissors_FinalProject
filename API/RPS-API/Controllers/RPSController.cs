@@ -47,7 +47,7 @@ namespace RPS_API.Controllers
             return r;
         }
 
-        // POST: /RPS/leaderboard
+        // GET: /RPS/leaderboard
         [HttpGet("Leaderboard")]
         public List<User> ViewLeaderBoard()
         {
