@@ -5,13 +5,15 @@ namespace RPS_API.models
     public class Round
     {
         public string Username { get; set; }
+        public int TurnNo { get; set; }
         public string PlayerChoice { get; set; }
         public string CPUChoice { get; set; }
         public string Result { get; set; }
 
-        public Round(string username, string playerChoice)
+        public Round(string username,  int turnNo, string playerChoice)
         {
             this.Username = username;
+            this.TurnNo = turnNo;
             this.PlayerChoice = playerChoice;
             this.CPUChoice = MakeCPUchoice();
             this.Result = GetResult();

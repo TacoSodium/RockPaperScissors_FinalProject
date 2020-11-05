@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReportDisplayComponent } from './routes/report-display/report-display.component';
 import { ScoreComponent } from './components/score/score.component';
 import { ScoreListComponent } from './components/score-list/score-list.component';
+import { RoundPickerComponent } from './routes/round-picker/round-picker.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ScoreListComponent } from './components/score-list/score-list.component
     ReportDisplayComponent,
     ScoreComponent,
     ScoreListComponent,
+    RoundPickerComponent,
   ],
   imports: [
     BrowserModule,

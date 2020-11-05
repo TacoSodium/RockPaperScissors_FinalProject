@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from "@angular/common/http";
 
-import { SubmitRequestModel, SubmitResponeModel } from "../models/SubmitModels"
+import { PickRequest } from "../models/SubmitModels"
+import { GameService } from './game.service';
+import { RoundResponse } from '../models/ResponseModels';
 
 @Injectable({
   providedIn: 'root'
@@ -10,33 +12,30 @@ import { SubmitRequestModel, SubmitResponeModel } from "../models/SubmitModels"
 export class RpsService {
 
   private _selection?: string;
-  private _username?: string;
-
+  private _currentTurn: number = 1;
+  
   get selection() {
     return this._selection;
   }
 
-  get username() {
-    return this._username;
+  get currentTurn() {
+    return this._currentTurn;
   }
 
-  cpuChoice: string;
-  result: string;
+  constructor(private gameService: GameService, private router: Router, private client: HttpClient) {}
 
-  constructor(private router: Router, private client: HttpClient) { }
+  commitSelection(option: PickRequest) {
+    this.client.post<RoundResponse>("http://localhost:5000/rps/pick", option);
 
-  commitUsername(username: string){
-    this._username = username;
-  }
-
-  commitSelection(option: SubmitRequestModel) {
-    this.client.post<SubmitResponeModel>("http://localhost:5000/rps", option)
-      .subscribe((response) => {
-        this._username = response.username,
-        this._selection = response.playerChoice,
-        this.cpuChoice = response.cpuChoice,
-        this.result = response.result,
-        this.router.navigateByUrl("/display");
-      })
+    if (this._currentTurn == this.gameService.noRounds)
+    {
+      this.router.navigateByUrl("/display");
+      this._currentTurn = 1;
+    }
+    else 
+    {
+      this.router.navigateByUrl("/pick");
+      this._currentTurn++;
+    }
   }
 }

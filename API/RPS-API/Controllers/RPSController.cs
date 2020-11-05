@@ -10,6 +10,7 @@ namespace RPS_API.Controllers
     public class RPSController : ControllerBase
     {
 
+        public static List<Game> OpenGames = new List<Game>();
         public static List<User> Positions = new List<User>();
 
         public RPSController()
@@ -19,32 +20,69 @@ namespace RPS_API.Controllers
 
         // POST: /RPS
         [HttpPost]
-        public Round PlayRequest([FromBody] PlayRequest request)
+        public Game PlayRequest([FromBody] PlayRequest request)
         {
-            Round r = new Round(request.Username, request.PlayerChoice);
+            Game g = new Game(request.Username, request.RoundChoice);
 
-            User user = null;
-            User found = Positions.Find(u => u.Username == request.Username);
+            foreach (Game game in OpenGames)
+            {
+                if (game.Username == request.Username)
+                {
+                    // this doesn't work
+                    OpenGames.Remove(game);
+                }
+            }
 
-            if (found == null)
-            {
-                user = new User(request.Username, 0, 1);
-                Positions.Add(user);
-            }
-            else
-            {
-                user = found;
-                user.TurnsPlayed++;
-            }
+            OpenGames.Add(g);
+
+            return g;
+        }
+
+        //POST /RPS/pick
+        public void PickChoice([FromBody] PickRequest request)
+        {
+            Game game = OpenGames.Find(g => g.Username == request.Username);
+
+            Round r = new Round(request.Username, request.TurnNo, request.PlayerChoice);
+
+            game.Rounds.Add(r);
 
             if (r.Result == "You win")
             {
-                user.Wins++;
+                game.WinTracking++;
+
+                if (r.TurnNo == game.NoTurns)
+                {
+                    User user = null;
+                    User found = Positions.Find(u => u.Username == request.Username);
+
+                    if (found == null)
+                    {
+                        user = new User(request.Username, 0, 1);
+                        Positions.Add(user);
+                    }
+                    else
+                    {
+                        user = found;
+                        user.GamesPlayed++;
+                    }
+
+                    if (game.Result == "You win")
+                    {
+                        user.Wins++;
+                    }
+
+                    user.CalcWinRatio();
+                }
             }
+        }
 
-            user.CalcWinRatio();
+        //POST: /RPS/display
+        public Game ViewResults([FromBody] DisplayRequest request)
+        {
+            Game game = OpenGames.Find(g => g.Username == request.Username);
 
-            return r;
+            return game;
         }
 
         // GET: /RPS/leaderboard

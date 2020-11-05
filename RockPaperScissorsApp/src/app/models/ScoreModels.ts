@@ -1,6 +1,7 @@
 export interface User {
     username: string;
     wins: number;
-    turnsPlayed: number;
+    gamesPlayed: number;
     winRatio: number;
+    lastFive: string
 }
