@@ -37,6 +37,10 @@ h2 {
 
 }
 
+.nullUsername {
+    background-color: rgb(255, 176, 167);
+}
+
 .routes {
     border: 1px solid grey;
     border-radius: 10px;

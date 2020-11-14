@@ -22,7 +22,7 @@ export class RoundPickerComponent implements OnInit {
 
   send() {
     if (this.gameService.username == null) {
-      alert("Please enter a username")
+      this.gameService.usernameWarning = true;
     }
     else {
       this.gameService.commitRoundSelection({

@@ -13,6 +13,9 @@ export class GameService {
 
   private _username?: string;
   private _roundSelection?: number;
+  private _gameResult?: string;
+
+  usernameWarning?: boolean = false;
 
   get username() {
     return this._username;
@@ -22,6 +25,10 @@ export class GameService {
     return this._roundSelection;
   }
 
+  get gameResult() {
+    return this._gameResult;
+  }
+
   // private _dateStarted?: Date;
   // private _winTracking?: number;
   // private _rounds?: Round[];
@@ -29,7 +36,7 @@ export class GameService {
 
   constructor(private router: Router, private client: HttpClient) { }
 
-  commitUsername(username: string){
+  commitUsername(username: string) {
     this._username = username;
   }
 
@@ -37,8 +44,12 @@ export class GameService {
     this.client.post<GameResponse>("http://localhost:5000/rps", option)
       .subscribe((response) => {
         this._username = response.username,
-        this._roundSelection = response.noTurns,
-        this.router.navigateByUrl("/pick");
+          this._roundSelection = response.noTurns,
+          this.router.navigateByUrl("/pick");
       })
+  }
+
+  commitGameResult(result: string) {
+    this._gameResult = result;
   }
 }
