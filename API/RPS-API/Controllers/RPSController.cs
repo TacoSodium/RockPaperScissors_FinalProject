@@ -67,9 +67,21 @@ namespace RPS_API.Controllers
                         user.GamesPlayed++;
                     }
 
-                    if (game.Result == "You win")
+                    if (game.NoTurns == 1)
                     {
-                        user.Wins++;
+                        game.Result = r.Result;
+                    }
+                    else
+                    {
+                        if (game.WinTracking > game.NoTurns / 2)
+                        {
+                            game.Result = "You win";
+                            user.Wins++;
+                        }
+                        else
+                        {
+                            game.Result = "You lose";
+                        }
                     }
 
                     user.CalcWinRatio();
