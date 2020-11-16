@@ -28,8 +28,7 @@ namespace RPS_API.Controllers
             {
                 if (game.Username == request.Username)
                 {
-                    // this doesn't work
-                    OpenGames.Remove(game);
+                    OpenGames.Remove(g);
                 }
             }
 
@@ -39,7 +38,8 @@ namespace RPS_API.Controllers
         }
 
         //POST /RPS/pick
-        public void PickChoice([FromBody] PickRequest request)
+        [HttpPost("pick")]
+        public Game PickChoice([FromBody] PickRequest request)
         {
             Game game = OpenGames.Find(g => g.Username == request.Username);
 
@@ -75,9 +75,12 @@ namespace RPS_API.Controllers
                     user.CalcWinRatio();
                 }
             }
+
+            return game;
         }
 
         //POST: /RPS/display
+        [HttpGet("display")]
         public Game ViewResults([FromBody] DisplayRequest request)
         {
             Game game = OpenGames.Find(g => g.Username == request.Username);
@@ -86,7 +89,7 @@ namespace RPS_API.Controllers
         }
 
         // GET: /RPS/leaderboard
-        [HttpGet("Leaderboard")]
+        [HttpGet("leaderboard")]
         public List<User> ViewLeaderBoard()
         {
             List<User> LeaderboardView = Positions.OrderByDescending(u => u.WinRatio).ToList();

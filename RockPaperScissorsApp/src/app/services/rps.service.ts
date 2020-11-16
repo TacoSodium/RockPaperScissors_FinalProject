@@ -4,16 +4,17 @@ import { HttpClient } from "@angular/common/http";
 
 import { PickRequest } from "../models/SubmitModels"
 import { GameService } from './game.service';
-import { RoundResponse } from '../models/ResponseModels';
+import { GameResponse, RoundResponse } from '../models/ResponseModels';
+import { Round } from '../models/Round';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RpsService {
 
-  private _selection?: string;
   private _currentTurn: number = 1;
-  
+  private _selection?: string;
+
   get selection() {
     return this._selection;
   }
@@ -22,20 +23,20 @@ export class RpsService {
     return this._currentTurn;
   }
 
-  constructor(private gameService: GameService, private router: Router, private client: HttpClient) {}
+  constructor(private gameService: GameService, private router: Router, private client: HttpClient) { }
 
   commitSelection(option: PickRequest) {
-    this.client.post<RoundResponse>("http://localhost:5000/rps/pick", option);
+    this.client.post<GameResponse>("http://localhost:5000/rps/pick", option)
+      .subscribe((response) => {
 
-    if (this._currentTurn == this.gameService.noRounds)
-    {
+      });
+
+    this._currentTurn++;
+
+    if (this.currentTurn > this.gameService.noRounds) {
       this.router.navigateByUrl("/display");
-      this._currentTurn = 1;
-    }
-    else 
-    {
+    } else {
       this.router.navigateByUrl("/pick");
-      this._currentTurn++;
     }
   }
 }

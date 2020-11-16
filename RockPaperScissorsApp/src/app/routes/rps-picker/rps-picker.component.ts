@@ -12,17 +12,17 @@ export class RpsPickerComponent implements OnInit {
 
   selection?: "rock" | "paper" | "scissors";
 
-  turn: number = this.rpsService.currentTurn;
-
   constructor(private gameService: GameService, private rpsService: RpsService, private router: Router) { }
 
+  turn: number;
   noRounds: number = this.gameService.noRounds;
 
   ngOnInit(): void {
-    if (this.gameService.noRounds == null)
-    {
+    if (this.noRounds == null) {
       this.router.navigateByUrl("/play");
     }
+
+    this.turn = this.rpsService.currentTurn;
   }
 
   selectOption(option: 'rock' | 'paper' | 'scissors') {
@@ -30,10 +30,10 @@ export class RpsPickerComponent implements OnInit {
   }
 
   send() {
-      this.rpsService.commitSelection({
-        username: this.gameService.username,
-        turnNo: this.turn,
-        playerChoice: this.selection,
-      });
+    this.rpsService.commitSelection({
+      username: this.gameService.username,
+      turnNo: this.rpsService.currentTurn,
+      playerChoice: this.selection,
+    });
   }
 }
