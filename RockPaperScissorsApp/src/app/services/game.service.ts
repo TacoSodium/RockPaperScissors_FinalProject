@@ -13,7 +13,6 @@ export class GameService {
 
   private _username?: string;
   private _roundSelection?: number;
-  private _gameResult?: string;
 
   usernameWarning?: boolean = false;
 
@@ -24,15 +23,6 @@ export class GameService {
   get noRounds() {
     return this._roundSelection;
   }
-
-  get gameResult() {
-    return this._gameResult;
-  }
-
-  // private _dateStarted?: Date;
-  // private _winTracking?: number;
-  // private _rounds?: Round[];
-  // private _result?: string;
 
   constructor(private router: Router, private client: HttpClient) { }
 
@@ -47,9 +37,5 @@ export class GameService {
           this._roundSelection = response.noTurns,
           this.router.navigateByUrl("/pick");
       })
-  }
-
-  commitGameResult(result: string) {
-    this._gameResult = result;
   }
 }

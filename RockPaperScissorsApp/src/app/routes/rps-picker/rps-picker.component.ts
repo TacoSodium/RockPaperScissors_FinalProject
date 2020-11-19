@@ -20,9 +20,9 @@ export class RpsPickerComponent implements OnInit {
   ngOnInit(): void {
     if (this.noRounds == null) {
       this.router.navigateByUrl("/play");
+    } else {
+      this.turn = this.rpsService.currentTurn;
     }
-
-    this.turn = this.rpsService.currentTurn;
   }
 
   selectOption(option: 'rock' | 'paper' | 'scissors') {

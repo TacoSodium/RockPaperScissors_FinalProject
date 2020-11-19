@@ -16,7 +16,7 @@ export class AppComponent {
 
   playing: boolean = true;
 
-  constructor(private gameService: GameService, private router: Router) { }
+  constructor(private gameService: GameService, private rpsSrevice: RpsService, private router: Router) { }
 
   toggleReports() {
     if (this.playing) {
@@ -25,6 +25,7 @@ export class AppComponent {
     }
     else
     {
+      this.rpsSrevice.resetTurns();
       this.router.navigateByUrl("/play");
       this.playing = true;
     }
