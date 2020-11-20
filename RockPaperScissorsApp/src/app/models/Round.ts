@@ -1,7 +1,7 @@
 export class Round {
-    Username: string;
-    TurnNo: number;
-    PlayerChoice: string;
-    CPUChoice: string;
-    Result: string;
+    username: string;
+    turnNo: number;
+    playerChoice: string;
+    cpuChoice: string;
+    result: string;
 }

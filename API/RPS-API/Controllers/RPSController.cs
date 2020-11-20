@@ -44,58 +44,55 @@ namespace RPS_API.Controllers
             Game game = OpenGames.Find(g => g.Username == request.Username);
 
             Round r = new Round(request.Username, request.TurnNo, request.PlayerChoice);
-
             game.Rounds.Add(r);
 
             if (r.Result == "You win")
             {
                 game.WinTracking++;
+            }
 
-                if (r.TurnNo == game.NoTurns)
+            if (r.TurnNo == game.NoTurns)
+            {
+                User user = null;
+                User found = Positions.Find(u => u.Username == request.Username);
+
+                if (found == null)
                 {
-                    User user = null;
-                    User found = Positions.Find(u => u.Username == request.Username);
+                    user = new User(request.Username, 0, 1);
+                    Positions.Add(user);
+                }
+                else
+                {
+                    user = found;
+                    user.GamesPlayed++;
+                }
 
-                    if (found == null)
+                if (game.NoTurns == 1)
+                {
+                    game.Result = r.Result;
+                }
+                else
+                {
+                    if (game.WinTracking > game.NoTurns / 2)
                     {
-                        user = new User(request.Username, 0, 1);
-                        Positions.Add(user);
+                        game.Result = "You win";
+                        user.ConcatLastFive('W');
+                        user.Wins++;
+                    }
+                    else if (game.WinTracking < game.NoTurns / 2)
+                    {
+                        game.Result = "You lose";
+                        user.ConcatLastFive('L');
                     }
                     else
                     {
-                        user = found;
-                        user.GamesPlayed++;
-                    }
-
-                    if (game.NoTurns == 1)
-                    {
-                        game.Result = r.Result;
-                    }
-                    else
-                    {
-                        if (game.WinTracking > game.NoTurns / 2)
-                        {
-                            game.Result = "You win";
-                            user.Wins++;
-                        }
-                        else
-                        {
-                            game.Result = "You lose";
-                        }
+                        game.Result = "It's a draw";
+                        user.ConcatLastFive('D');
                     }
 
                     user.CalcWinRatio();
                 }
             }
-
-            return game;
-        }
-
-        //POST: /RPS/display
-        [HttpGet("display")]
-        public Game ViewResults([FromBody] DisplayRequest request)
-        {
-            Game game = OpenGames.Find(g => g.Username == request.Username);
 
             return game;
         }

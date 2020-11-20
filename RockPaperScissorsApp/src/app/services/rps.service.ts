@@ -14,8 +14,9 @@ export class RpsService {
 
   private _currentTurn: number = 1;
   private _selection?: string;
-  public _rounds?: Round[] = [];
   private _gameResult?: string;
+
+  rounds: Round[] = [];
 
   get selection() {
     return this._selection;
@@ -29,10 +30,6 @@ export class RpsService {
     return this._gameResult;
   }
 
-  get rounds() {
-    return this._rounds;
-  }
-
   constructor(private gameService: GameService, private router: Router, private client: HttpClient) {
     this.client = client
    }
@@ -43,10 +40,8 @@ export class RpsService {
         this._currentTurn++;
 
         if (this.currentTurn > this.gameService.noRounds) {
-          this._rounds = response.rounds;
+          this.rounds = response.rounds;
           this._gameResult = response.result;
-
-          console.log(this.gameResult);
 
           this.resetTurns();
           

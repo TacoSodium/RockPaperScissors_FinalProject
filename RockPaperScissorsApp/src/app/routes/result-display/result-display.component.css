@@ -35,30 +35,3 @@ button:hover {
     margin-top: 50px;
     padding: 0 50px;
 }
-
-.choices {
-    display: inline-flex;
-}
-
-.selection {
-    width: 200px;
-    height: 200px;
-}
-
-.rock {
-    background: url("C:\Users\Coryn\OneDrive\Cert IV 02\Final Assessment\RockPaperScissorsApp\src\assets\images\rock.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.paper {
-    background: url("C:\Users\Coryn\OneDrive\Cert IV 02\Final Assessment\RockPaperScissorsApp\src\assets\images\paper.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.scissors {
-    background: url("C:\Users\Coryn\OneDrive\Cert IV 02\Final Assessment\RockPaperScissorsApp\src\assets\images\scissors.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-}

@@ -12,16 +12,13 @@ export class RpsPickerComponent implements OnInit {
 
   selection?: "rock" | "paper" | "scissors";
 
-  constructor(private gameService: GameService, private rpsService: RpsService, private router: Router) { }
+  constructor(private gameService: GameService, public rpsService: RpsService, private router: Router) { }
 
-  turn: number;
   noRounds: number = this.gameService.noRounds;
 
   ngOnInit(): void {
     if (this.noRounds == null) {
       this.router.navigateByUrl("/play");
-    } else {
-      this.turn = this.rpsService.currentTurn;
     }
   }
 

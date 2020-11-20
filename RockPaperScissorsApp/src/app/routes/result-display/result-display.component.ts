@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RpsService } from "../../services/rps.service";
+import { RpsService } from 'src/app/services/rps.service';
 
 @Component({
   selector: 'app-result-display',
@@ -10,17 +10,14 @@ import { RpsService } from "../../services/rps.service";
 export class ResultDisplayComponent implements OnInit {
 
   constructor(public rpsService: RpsService, private router: Router) {
-    this.rpsService.selection;
   }
 
   ngOnInit(): void {
-    if (this.rpsService.selection == null) {
-      this.router.navigateByUrl("/pick");
-    }
   }
 
   playAgain() {
-    this.router.navigateByUrl("/pick");
+    this.rpsService.resetTurns();
+    this.router.navigateByUrl("/play");
   }
 
 }

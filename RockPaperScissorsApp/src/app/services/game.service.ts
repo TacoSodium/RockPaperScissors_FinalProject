@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import { PlayRequest } from '../models/SubmitModels';
 import { GameResponse } from '../models/ResponseModels';
-import { Round } from '../models/Round';
 
 @Injectable({
   providedIn: 'root'
