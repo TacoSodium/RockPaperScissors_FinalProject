@@ -11,7 +11,7 @@ export class RoundPickerComponent implements OnInit {
 
   roundSelection?: 1 | 3 | 5;
 
-  constructor(private gameService: GameService, private router: Router) { }
+  constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
   }

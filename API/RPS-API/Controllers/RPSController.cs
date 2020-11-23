@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RPS_API.models;
 using System.Linq;
+using System;
 
 namespace RPS_API.Controllers
 {
@@ -89,8 +90,14 @@ namespace RPS_API.Controllers
                         game.Result = "It's a draw";
                         user.ConcatLastFive('D');
                     }
+                }
 
-                    user.CalcWinRatio();
+                user.CalcWinRatio();
+
+                if (game.Rounds.Count > game.NoTurns)
+                {
+                    int remove = Math.Max(0, game.Rounds.Count - game.NoTurns);
+                    game.Rounds.RemoveRange(0, remove);
                 }
             }
 

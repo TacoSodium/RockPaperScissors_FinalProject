@@ -27,10 +27,14 @@ export class RpsPickerComponent implements OnInit {
   }
 
   send() {
-    this.rpsService.commitSelection({
-      username: this.gameService.username,
-      turnNo: this.rpsService.currentTurn,
-      playerChoice: this.selection,
-    });
+    if (this.selection == null) {
+      alert("Select an option");
+    } else {
+      this.rpsService.commitSelection({
+        username: this.gameService.username,
+        turnNo: this.rpsService.currentTurn,
+        playerChoice: this.selection,
+      });
+    }
   }
 }

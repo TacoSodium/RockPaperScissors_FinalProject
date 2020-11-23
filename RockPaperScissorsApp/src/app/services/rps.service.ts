@@ -32,7 +32,7 @@ export class RpsService {
 
   constructor(private gameService: GameService, private router: Router, private client: HttpClient) {
     this.client = client
-   }
+  }
 
   commitSelection(option: PickRequest) {
     this.client.post<GameResponse>("http://localhost:5000/rps/pick", option)
@@ -41,12 +41,20 @@ export class RpsService {
 
         if (this.currentTurn > this.gameService.noRounds) {
           this.rounds = response.rounds;
+
+          if (this.gameService.noRounds == 1) {
+            this.rounds.splice(0, this.rounds.length - 1);
+          }
+
+          console.log("after clear", this.rounds);
+
           this._gameResult = response.result;
 
           this.resetTurns();
-          
+
           this.router.navigateByUrl("/display");
         } else {
+          this._selection = null;
           this.router.navigateByUrl("/pick");
         }
       });

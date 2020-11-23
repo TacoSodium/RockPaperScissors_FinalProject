@@ -18,8 +18,15 @@ namespace RPS_API.models
             this.NoTurns = noTurns;
             this.DateStarted = DateTime.Now;
             this.WinTracking = 0;
-            this.Rounds = new List<Round>();
+            ResetRounds();
             this.Result = null;
+        }
+
+        public void ResetRounds()
+        {
+            this.Rounds = new List<Round>();
+
+            Rounds.Clear();
         }
     }
 }
