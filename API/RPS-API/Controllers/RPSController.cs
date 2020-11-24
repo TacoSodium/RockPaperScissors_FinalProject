@@ -25,11 +25,11 @@ namespace RPS_API.Controllers
         {
             Game g = new Game(request.Username, request.RoundChoice);
 
-            foreach (Game game in OpenGames)
+            for (int i = 0; i < OpenGames.Count; i++)
             {
-                if (game.Username == request.Username)
+                if (OpenGames[i].Username == g.Username)
                 {
-                    OpenGames.Remove(g);
+                    OpenGames.Remove(OpenGames[i]);
                 }
             }
 
@@ -68,37 +68,25 @@ namespace RPS_API.Controllers
                     user.GamesPlayed++;
                 }
 
-                if (game.NoTurns == 1)
+                if (game.WinTracking > game.NoTurns / 2)
                 {
-                    game.Result = r.Result;
+                    game.Result = "You win";
+                    user.ConcatLastFive('W');
+                    user.Wins++;
+                }
+                else if (game.WinTracking < game.NoTurns / 2)
+                {
+                    game.Result = "You lose";
+                    user.ConcatLastFive('L');
                 }
                 else
                 {
-                    if (game.WinTracking > game.NoTurns / 2)
-                    {
-                        game.Result = "You win";
-                        user.ConcatLastFive('W');
-                        user.Wins++;
-                    }
-                    else if (game.WinTracking < game.NoTurns / 2)
-                    {
-                        game.Result = "You lose";
-                        user.ConcatLastFive('L');
-                    }
-                    else
-                    {
-                        game.Result = "It's a draw";
-                        user.ConcatLastFive('D');
-                    }
+                    game.Result = "It's a draw";
+                    user.ConcatLastFive('D');
                 }
 
                 user.CalcWinRatio();
 
-                if (game.Rounds.Count > game.NoTurns)
-                {
-                    int remove = Math.Max(0, game.Rounds.Count - game.NoTurns);
-                    game.Rounds.RemoveRange(0, remove);
-                }
             }
 
             return game;

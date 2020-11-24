@@ -41,13 +41,6 @@ export class RpsService {
 
         if (this.currentTurn > this.gameService.noRounds) {
           this.rounds = response.rounds;
-
-          if (this.gameService.noRounds == 1) {
-            this.rounds.splice(0, this.rounds.length - 1);
-          }
-
-          console.log("after clear", this.rounds);
-
           this._gameResult = response.result;
 
           this.resetTurns();
