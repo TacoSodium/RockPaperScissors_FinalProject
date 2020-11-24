@@ -34,7 +34,12 @@ h2 {
 
 .login h4 {
     padding-right: 10px;
+}
 
+.nullUsername {
+    background-color: rgb(255, 176, 167);
+    outline-color: red;
+    border: 1px solid red;
 }
 
 .routes {

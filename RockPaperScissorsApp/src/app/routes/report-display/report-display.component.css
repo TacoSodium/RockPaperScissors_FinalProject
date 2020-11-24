@@ -8,7 +8,9 @@
     padding: 70px;
 }
 
-.headers {
-    display: flex;
-    justify-content: space-between;
+.board {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    justify-items: center;
+    justify-content: space-evenly;
 }

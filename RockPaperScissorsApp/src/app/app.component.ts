@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { GameService } from './services/game.service';
 import { RpsService } from './services/rps.service';
 import { ScoreService } from './services/score.service';
 
@@ -15,7 +16,7 @@ export class AppComponent {
 
   playing: boolean = true;
 
-  constructor(private rpsService: RpsService, private scoreService: ScoreService, private router: Router) { }
+  constructor(private gameService: GameService, private rpsSrevice: RpsService, private router: Router) { }
 
   toggleReports() {
     if (this.playing) {
@@ -24,13 +25,14 @@ export class AppComponent {
     }
     else
     {
-      this.router.navigateByUrl("/pick");
+      this.rpsSrevice.resetTurns();
+      this.router.navigateByUrl("/play");
       this.playing = true;
     }
   }
 
   setUsername(event: any) {
     this.username = event.target.value;
-    this.rpsService.commitUsername(event.target.value);
+    this.gameService.commitUsername(event.target.value);
   }
 }

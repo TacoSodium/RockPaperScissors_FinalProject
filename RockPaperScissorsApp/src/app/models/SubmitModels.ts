@@ -1,11 +1,14 @@
-export interface SubmitRequestModel {
+export interface PlayRequest {
     username: string;
-    playerChoice: string;
+    roundChoice: number;
 }
 
-export interface SubmitResponeModel {
+export interface PickRequest {
     username: string;
     playerChoice: string;
-    cpuChoice: string;
-    result: string;
+    turnNo: number;
+}
+
+export interface DisplayRequest {
+    username: string;
 }

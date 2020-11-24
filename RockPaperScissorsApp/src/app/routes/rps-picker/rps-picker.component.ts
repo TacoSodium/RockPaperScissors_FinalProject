@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { GameService } from 'src/app/services/game.service';
 import { RpsService } from "../../services/rps.service";
 
 @Component({
@@ -11,9 +12,14 @@ export class RpsPickerComponent implements OnInit {
 
   selection?: "rock" | "paper" | "scissors";
 
-  constructor(private rpsService: RpsService, private router: Router) { }
+  constructor(private gameService: GameService, public rpsService: RpsService, private router: Router) { }
+
+  noRounds: number = this.gameService.noRounds;
 
   ngOnInit(): void {
+    if (this.noRounds == null) {
+      this.router.navigateByUrl("/play");
+    }
   }
 
   selectOption(option: 'rock' | 'paper' | 'scissors') {
@@ -21,13 +27,13 @@ export class RpsPickerComponent implements OnInit {
   }
 
   send() {
-    if (this.rpsService.username == null) {
-      alert("Please enter a username")
-    }
-    else {
+    if (this.selection == null) {
+      alert("Select an option");
+    } else {
       this.rpsService.commitSelection({
-        username: this.rpsService.username,
-        playerChoice: this.selection
+        username: this.gameService.username,
+        turnNo: this.rpsService.currentTurn,
+        playerChoice: this.selection,
       });
     }
   }

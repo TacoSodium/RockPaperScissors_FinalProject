@@ -2,12 +2,11 @@ using System;
 
 namespace RPS_API.models
 {
-    public class PlayRequest
+    public class DisplayRequest
     {
         public string Username { get; set; }
-        public int RoundChoice { get; set; }
 
-        public PlayRequest()
+        public DisplayRequest()
         {
         }
     }

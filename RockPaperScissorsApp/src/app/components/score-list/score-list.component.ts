@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ScoreService } from 'src/app/services/score.service';
-import { User } from '../../models/ScoreModels';
 
 @Component({
   selector: 'app-score-list',
